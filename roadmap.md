@@ -1,5 +1,3 @@
-# System Architecture Overview
-
 ## Tech Stack
 - Frontend: Next.js with TypeScript
 - Backend: Node.js with Express
