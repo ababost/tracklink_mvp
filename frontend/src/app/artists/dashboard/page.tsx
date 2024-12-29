@@ -1,23 +1,60 @@
-// src/app/artists/dashboard/page.tsx
-import { Gigs } from '@/components/dashboard/Gigs'
-import { Stats } from '@/components/dashboard/Stats'
-import { DashboardHeader } from '@/components/dashboard/DashboardHeader'
-import { Sidebar } from '@/components/dashboard/Sidebar'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-export default function ArtistDashboard() {
+const mockStats = [
+  {
+    title: 'Total Bookings',
+    value: '12',
+    description: 'This month',
+  },
+  {
+    title: 'Pending Requests',
+    value: '4',
+    description: 'Awaiting response',
+  },
+  {
+    title: 'Messages',
+    value: '8',
+    description: 'Unread',
+  },
+  {
+    title: 'Earnings',
+    value: '$4,200',
+    description: 'This month',
+  },
+];
+
+export default function DashboardPage() {
   return (
-    <div className="min-h-screen bg-white flex">
-      {/* Sidebar */}
-      <Sidebar />
+    <div className="p-6 space-y-6">
+      <h1 className="text-2xl font-bold">Dashboard</h1>
 
-      {/* Main content */}
-      <div className="flex-1">
-        <DashboardHeader />
-        <main className="p-8">
-          <Stats />
-          <Gigs />
-        </main>
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {mockStats.map((stat, index) => (
+          <Card key={index}>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">
+                {stat.title}
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stat.value}</div>
+              <p className="text-xs text-muted-foreground">
+                {stat.description}
+              </p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Recent Activity section can be added here */}
+      <div className="mt-6">
+        <h2 className="text-lg font-semibold mb-4">Recent Activity</h2>
+        <Card>
+          <CardContent className="p-6">
+            <p className="text-gray-500">Coming soon...</p>
+          </CardContent>
+        </Card>
       </div>
     </div>
-  )
+  );
 }
