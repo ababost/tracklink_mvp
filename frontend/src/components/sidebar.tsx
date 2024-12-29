@@ -7,14 +7,16 @@ import {
   BarChart3,
   BookOpen,
   Settings,
+  LayoutDashboard,
 } from 'lucide-react';
 
 const navigation = [
-  { name: 'Calendar', href: '/dashboard/calendar', icon: Calendar },
-  { name: 'Messages', href: '/dashboard/messages', icon: MessageSquare },
-  { name: 'Bookings', href: '/dashboard/bookings', icon: BookOpen },
-  { name: 'Analytics', href: '/dashboard/analytics', icon: BarChart3 },
-  { name: 'Settings', href: '/dashboard/settings', icon: Settings },
+  { name: 'Dashboard', href: '/artists/dashboard', icon: LayoutDashboard },
+  { name: 'Calendar', href: '/artists/calendar', icon: Calendar },
+  { name: 'Messages', href: '/artists/messages', icon: MessageSquare },
+  { name: 'Bookings', href: '/artists/bookings', icon: BookOpen },
+  { name: 'Analytics', href: '/artists/analytics', icon: BarChart3 },
+  { name: 'Settings', href: '/artists/settings', icon: Settings },
 ];
 
 export function Sidebar() {
