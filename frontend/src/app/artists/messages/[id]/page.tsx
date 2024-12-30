@@ -80,7 +80,9 @@ export default function MessagePage({ params }: { params: { id: string } }) {
         </Button>
         <div className="flex items-center gap-3">
           <Avatar>
-            <AvatarFallback>{getInitials(mockThread.promoter.name)}</AvatarFallback>
+            <AvatarFallback className="bg-gray-100 text-gray-600">
+              {getInitials(mockThread.promoter.name)}
+            </AvatarFallback>
           </Avatar>
           <div>
             <h1 className="text-2xl font-bold">{mockThread.subject}</h1>
@@ -156,7 +158,9 @@ export default function MessagePage({ params }: { params: { id: string } }) {
               >
                 {!message.isSender && (
                   <Avatar className="mr-2">
-                    <AvatarFallback>{getInitials(message.sender)}</AvatarFallback>
+                    <AvatarFallback className="bg-gray-100 text-gray-600">
+                      {getInitials(message.sender)}
+                    </AvatarFallback>
                   </Avatar>
                 )}
                 <div
@@ -167,14 +171,15 @@ export default function MessagePage({ params }: { params: { id: string } }) {
                   } rounded-lg p-4`}
                 >
                   <div className="flex justify-between items-start gap-4">
-                    <p className="font-medium">{message.sender}</p>
                     <p className="text-xs opacity-70">{message.timestamp}</p>
                   </div>
                   <p className="text-sm">{message.content}</p>
                 </div>
                 {message.isSender && (
                   <Avatar className="ml-2">
-                    <AvatarFallback>{getInitials(message.sender)}</AvatarFallback>
+                    <AvatarFallback className="bg-blue-500 text-white">
+                      {getInitials(message.sender)}
+                    </AvatarFallback>
                   </Avatar>
                 )}
               </div>
