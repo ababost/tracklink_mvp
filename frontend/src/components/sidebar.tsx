@@ -10,6 +10,7 @@ import {
   BookOpen,
   Settings,
   LayoutDashboard,
+  MapPin,
 } from 'lucide-react';
 
 const navigation = [
@@ -17,6 +18,7 @@ const navigation = [
   { name: 'Calendar', href: '/artists/calendar', icon: Calendar },
   { name: 'Messages', href: '/artists/messages', icon: MessageSquare },
   { name: 'Bookings', href: '/artists/bookings', icon: BookOpen },
+  { name: 'Venues', href: '/artists/venues', icon: MapPin },
   { name: 'Analytics', href: '/artists/analytics', icon: BarChart3 },
   { name: 'Settings', href: '/artists/settings', icon: Settings },
 ];
