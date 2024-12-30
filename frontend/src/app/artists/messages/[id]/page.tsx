@@ -49,7 +49,6 @@ const mockThread = {
   },
 };
 
-// Helper function to get initials
 function getInitials(name: string) {
   return name
     .split(' ')
@@ -80,13 +79,13 @@ export default function MessagePage({ params }: { params: { id: string } }) {
         </Button>
         <div className="flex items-center gap-3">
           <Avatar>
-            <AvatarFallback className="bg-gray-100 text-gray-600">
+            <AvatarFallback className="bg-secondary text-secondary-foreground">
               {getInitials(mockThread.promoter.name)}
             </AvatarFallback>
           </Avatar>
           <div>
             <h1 className="text-2xl font-bold">{mockThread.subject}</h1>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-muted-foreground">
               with {mockThread.promoter.name} from {mockThread.promoter.company}
             </p>
           </div>
@@ -100,24 +99,24 @@ export default function MessagePage({ params }: { params: { id: string } }) {
             <h3 className="font-semibold mb-4">Booking Summary</h3>
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div className="flex items-center gap-2">
-                <Calendar className="h-4 w-4 text-gray-500" />
+                <Calendar className="h-4 w-4 text-muted-foreground" />
                 <span>{mockThread.summary.eventDate}</span>
               </div>
               <div className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-gray-500" />
+                <MapPin className="h-4 w-4 text-muted-foreground" />
                 <span>{mockThread.summary.location}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Clock className="h-4 w-4 text-gray-500" />
+                <Clock className="h-4 w-4 text-muted-foreground" />
                 <span>{mockThread.summary.duration}</span>
               </div>
               <div className="flex items-center gap-2">
-                <DollarSign className="h-4 w-4 text-gray-500" />
+                <DollarSign className="h-4 w-4 text-muted-foreground" />
                 <span>{mockThread.summary.budget}</span>
               </div>
             </div>
             <div className="mt-4">
-              <span className="inline-flex items-center rounded-full bg-yellow-100 px-2.5 py-0.5 text-xs font-medium text-yellow-800">
+              <span className="inline-flex items-center rounded-full bg-yellow-100 dark:bg-yellow-900 px-2.5 py-0.5 text-xs font-medium text-yellow-800 dark:text-yellow-100">
                 {mockThread.summary.status}
               </span>
             </div>
@@ -126,20 +125,18 @@ export default function MessagePage({ params }: { params: { id: string } }) {
 
         <Card>
           <CardContent className="p-4">
-            <div className="flex items-center gap-3 mb-4">
-              <h3 className="font-semibold">Promoter Information</h3>
-            </div>
+            <h3 className="font-semibold mb-4">Promoter Information</h3>
             <div className="space-y-3">
               <div className="flex items-center gap-2 text-sm">
-                <Building className="h-4 w-4 text-gray-500" />
+                <Building className="h-4 w-4 text-muted-foreground" />
                 <span>{mockThread.promoter.company}</span>
               </div>
               <div className="flex items-center gap-2 text-sm">
-                <Mail className="h-4 w-4 text-gray-500" />
+                <Mail className="h-4 w-4 text-muted-foreground" />
                 <span>{mockThread.promoter.email}</span>
               </div>
               <div className="flex items-center gap-2 text-sm">
-                <Phone className="h-4 w-4 text-gray-500" />
+                <Phone className="h-4 w-4 text-muted-foreground" />
                 <span>{mockThread.promoter.phone}</span>
               </div>
             </div>
@@ -158,17 +155,15 @@ export default function MessagePage({ params }: { params: { id: string } }) {
               >
                 {!message.isSender && (
                   <Avatar className="mr-2">
-                    <AvatarFallback className="bg-gray-100 text-gray-600">
+                    <AvatarFallback className="bg-secondary text-secondary-foreground">
                       {getInitials(message.sender)}
                     </AvatarFallback>
                   </Avatar>
                 )}
                 <div
-                  className={`max-w-[80%] space-y-1 ${
-                    message.isSender 
-                      ? 'bg-blue-500 text-white' 
-                      : 'bg-gray-100 text-gray-900'
-                  } rounded-lg p-4`}
+                  className={`max-w-[80%] space-y-1 rounded-lg p-4 ${message.isSender 
+                    ? 'bg-primary text-primary-foreground' 
+                    : 'bg-secondary text-secondary-foreground'}`}
                 >
                   <div className="flex justify-between items-start gap-4">
                     <p className="text-xs opacity-70">{message.timestamp}</p>
@@ -177,7 +172,7 @@ export default function MessagePage({ params }: { params: { id: string } }) {
                 </div>
                 {message.isSender && (
                   <Avatar className="ml-2">
-                    <AvatarFallback className="bg-blue-500 text-white">
+                    <AvatarFallback className="bg-primary text-primary-foreground">
                       {getInitials(message.sender)}
                     </AvatarFallback>
                   </Avatar>
