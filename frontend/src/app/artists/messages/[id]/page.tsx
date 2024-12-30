@@ -5,12 +5,18 @@ import { useRouter } from 'next/navigation';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { ArrowLeft, Send } from 'lucide-react';
+import { ArrowLeft, Send, Phone, Mail, Building, Clock, DollarSign, Calendar, MapPin } from 'lucide-react';
 
-// Mock data for a single message thread
 const mockThread = {
   id: 1,
   subject: 'Booking Request for Summer Festival',
+  summary: {
+    eventDate: '2024-07-15',
+    location: 'Central Park, NYC',
+    duration: '90 minutes',
+    budget: '$5000',
+    status: 'In Negotiation'
+  },
   messages: [
     {
       id: 1,
@@ -47,7 +53,6 @@ export default function MessagePage({ params }: { params: { id: string } }) {
   const [newMessage, setNewMessage] = useState('');
 
   const handleSend = () => {
-    // Handle sending message
     console.log('Sending message:', newMessage);
     setNewMessage('');
   };
@@ -69,6 +74,60 @@ export default function MessagePage({ params }: { params: { id: string } }) {
             with {mockThread.promoter.name} from {mockThread.promoter.company}
           </p>
         </div>
+      </div>
+
+      {/* Summary and Promoter Info Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Booking Summary */}
+        <Card>
+          <CardContent className="p-4">
+            <h3 className="font-semibold mb-4">Booking Summary</h3>
+            <div className="grid grid-cols-2 gap-4 text-sm">
+              <div className="flex items-center gap-2">
+                <Calendar className="h-4 w-4 text-gray-500" />
+                <span>Event Date: {mockThread.summary.eventDate}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <MapPin className="h-4 w-4 text-gray-500" />
+                <span>Location: {mockThread.summary.location}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Clock className="h-4 w-4 text-gray-500" />
+                <span>Duration: {mockThread.summary.duration}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <DollarSign className="h-4 w-4 text-gray-500" />
+                <span>Budget: {mockThread.summary.budget}</span>
+              </div>
+            </div>
+            <div className="mt-4">
+              <span className="inline-flex items-center rounded-full bg-yellow-100 px-2.5 py-0.5 text-xs font-medium text-yellow-800">
+                {mockThread.summary.status}
+              </span>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Promoter Info */}
+        <Card>
+          <CardContent className="p-4">
+            <h3 className="font-semibold mb-4">Promoter Information</h3>
+            <div className="space-y-3">
+              <div className="flex items-center gap-2 text-sm">
+                <Building className="h-4 w-4 text-gray-500" />
+                <span>{mockThread.promoter.company}</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <Mail className="h-4 w-4 text-gray-500" />
+                <span>{mockThread.promoter.email}</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <Phone className="h-4 w-4 text-gray-500" />
+                <span>{mockThread.promoter.phone}</span>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
       {/* Message Thread */}
@@ -115,19 +174,6 @@ export default function MessagePage({ params }: { params: { id: string } }) {
                 Send Message
               </Button>
             </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Promoter Info */}
-      <Card>
-        <CardContent className="p-4">
-          <h3 className="font-semibold mb-4">Promoter Information</h3>
-          <div className="space-y-2 text-sm">
-            <p><span className="text-gray-500">Name:</span> {mockThread.promoter.name}</p>
-            <p><span className="text-gray-500">Company:</span> {mockThread.promoter.company}</p>
-            <p><span className="text-gray-500">Email:</span> {mockThread.promoter.email}</p>
-            <p><span className="text-gray-500">Phone:</span> {mockThread.promoter.phone}</p>
           </div>
         </CardContent>
       </Card>
