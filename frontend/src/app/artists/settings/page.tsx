@@ -1,8 +1,12 @@
+"use client";
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Textarea } from '@/components/ui/textarea';
+import { ThemeToggle } from '@/components/theme-toggle';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Moon } from 'lucide-react';
 
 const mockProfile = {
   name: 'DJ Pulse',
@@ -28,7 +32,7 @@ export default function SettingsPage() {
       <Tabs defaultValue="profile" className="space-y-4">
         <TabsList>
           <TabsTrigger value="profile">Profile</TabsTrigger>
-          <TabsTrigger value="booking">Booking</TabsTrigger>
+          <TabsTrigger value="appearance">Appearance</TabsTrigger>
           <TabsTrigger value="notifications">Notifications</TabsTrigger>
           <TabsTrigger value="account">Account</TabsTrigger>
         </TabsList>
@@ -93,23 +97,34 @@ export default function SettingsPage() {
           </Card>
         </TabsContent>
 
-        <TabsContent value="booking" className="space-y-4">
+        <TabsContent value="appearance" className="space-y-4">
           <Card>
             <CardHeader>
-              <CardTitle>Booking Preferences</CardTitle>
+              <CardTitle>Theme Settings</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Rate per Hour</label>
-                  <Input defaultValue={mockProfile.ratePerHour} />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Minimum Duration</label>
-                  <Input defaultValue={mockProfile.minimumDuration} />
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="space-y-0.5">
+                    <h3 className="font-medium">Dark Mode</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Toggle between light and dark theme
+                    </p>
+                  </div>
+                  <ThemeToggle />
                 </div>
               </div>
-              <Button>Save Changes</Button>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Color Preferences</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground">
+                More color customization options coming soon...
+              </p>
             </CardContent>
           </Card>
         </TabsContent>
@@ -120,7 +135,9 @@ export default function SettingsPage() {
               <CardTitle>Notification Preferences</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-gray-500">Notification settings coming soon...</p>
+              <p className="text-sm text-muted-foreground">
+                Notification settings coming soon...
+              </p>
             </CardContent>
           </Card>
         </TabsContent>
@@ -131,7 +148,9 @@ export default function SettingsPage() {
               <CardTitle>Account Settings</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-gray-500">Account settings coming soon...</p>
+              <p className="text-sm text-muted-foreground">
+                Account settings coming soon...
+              </p>
             </CardContent>
           </Card>
         </TabsContent>
