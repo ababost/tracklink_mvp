@@ -30,7 +30,7 @@ const mockThread = {
       id: 3,
       sender: 'John Promoter',
       timestamp: '2024-01-15 2:15 PM',
-      content: 'The festival is located in Central Park, NYC. We're looking at a 90-minute set from 10:30 PM to midnight. Our budget for the headliner is $5000, including accommodation and travel. Does this align with your requirements?',
+      content: "The festival is located in Central Park, NYC. We\'re looking at a 90-minute set from 10:30 PM to midnight. Our budget for the headliner is $5000, including accommodation and travel. Does this align with your requirements?",
       isSender: false,
     },
   ],
