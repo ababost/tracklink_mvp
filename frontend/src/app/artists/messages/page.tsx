@@ -3,6 +3,7 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useRouter } from 'next/navigation';
 import { MessageSquarePlus } from 'lucide-react';
@@ -47,6 +48,15 @@ const mockMessages = [
   }
 ];
 
+// Helper function to get initials
+function getInitials(name: string) {
+  return name
+    .split(' ')
+    .map(word => word[0])
+    .join('')
+    .toUpperCase();
+}
+
 export default function MessagesPage() {
   const router = useRouter();
 
@@ -85,27 +95,37 @@ export default function MessagesPage() {
               onClick={() => router.push(`/artists/messages/${message.id}`)}
             >
               <CardContent className="p-4">
-                <div className="flex justify-between items-start">
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2">
-                      <h3 className={`font-semibold ${
-                        message.unread ? 'text-blue-600' : ''
-                      }`}>
-                        {message.sender}
-                      </h3>
-                      <span className="text-sm text-gray-500">•</span>
-                      <span className="text-sm text-gray-500">{message.company}</span>
+                <div className="flex gap-4">
+                  {/* Avatar */}
+                  <Avatar>
+                    <AvatarFallback>{getInitials(message.sender)}</AvatarFallback>
+                  </Avatar>
+
+                  {/* Message Content */}
+                  <div className="flex-1">
+                    <div className="flex justify-between items-start">
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-2">
+                          <h3 className={`font-semibold ${
+                            message.unread ? 'text-blue-600' : ''
+                          }`}>
+                            {message.sender}
+                          </h3>
+                          <span className="text-sm text-gray-500">•</span>
+                          <span className="text-sm text-gray-500">{message.company}</span>
+                        </div>
+                        <p className="text-sm font-medium text-gray-800">{message.subject}</p>
+                        <p className="text-sm text-gray-500">{message.preview}</p>
+                      </div>
+                      <div className="flex flex-col items-end gap-2">
+                        <span className="text-xs text-gray-400">{message.date}</span>
+                        {message.unread && (
+                          <span className="inline-flex items-center rounded-full bg-blue-100 px-2 py-1 text-xs font-medium text-blue-700">
+                            New
+                          </span>
+                        )}
+                      </div>
                     </div>
-                    <p className="text-sm font-medium text-gray-800">{message.subject}</p>
-                    <p className="text-sm text-gray-500">{message.preview}</p>
-                  </div>
-                  <div className="flex flex-col items-end gap-2">
-                    <span className="text-xs text-gray-400">{message.date}</span>
-                    {message.unread && (
-                      <span className="inline-flex items-center rounded-full bg-blue-100 px-2 py-1 text-xs font-medium text-blue-700">
-                        New
-                      </span>
-                    )}
                   </div>
                 </div>
               </CardContent>
