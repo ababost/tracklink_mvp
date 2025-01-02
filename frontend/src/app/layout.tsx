@@ -1,9 +1,13 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Urbanist } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 
-const inter = Inter({ subsets: ['latin'] });
+const urbanist = Urbanist({ 
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-urbanist',
+});
 
 export const metadata: Metadata = {
   title: 'TrackLink - DJ Booking Platform',
@@ -24,7 +28,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <body className={inter.className}>
+      <body className={`${urbanist.variable} font-sans`}>
         <ThemeProvider>
           {children}
         </ThemeProvider>
