@@ -13,6 +13,8 @@ import {
   Settings,
   LayoutDashboard,
   MapPin,
+  Sun,
+  Moon
 } from 'lucide-react';
 
 const navigation = [
@@ -27,10 +29,15 @@ const navigation = [
 
 export function Sidebar() {
   const pathname = usePathname();
-  const { theme } = useTheme();
+  const { theme, setTheme } = useTheme();
+
+  const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  };
 
   return (
-    <div className="flex flex-col w-64 border-r bg-gray-50 dark:bg-dark">
+    <div className="flex flex-col h-screen w-64 border-r bg-gray-50 dark:bg-dark">
+      {/* Logo Section */}
       <div className="p-4">
         <Image
           src={theme === 'dark' ? '/Logo_tracklink_white.png' : '/Logo_tracklink_black.png'}
@@ -41,6 +48,8 @@ export function Sidebar() {
           className="object-contain"
         />
       </div>
+
+      {/* Navigation Section */}
       <nav className="flex-1 space-y-1 p-2">
         {navigation.map((item) => {
           const isActive = pathname === item.href;
@@ -64,6 +73,26 @@ export function Sidebar() {
           );
         })}
       </nav>
+
+      {/* Theme Toggle Button */}
+      <div className="p-4 border-t border-gray-200 dark:border-gray-800">
+        <button
+          onClick={toggleTheme}
+          className="flex items-center w-full px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-primary/10 dark:hover:bg-primary-light/10 rounded-md transition-colors"
+        >
+          {theme === 'dark' ? (
+            <>
+              <Sun className="mr-3 h-5 w-5" />
+              Light Mode
+            </>
+          ) : (
+            <>
+              <Moon className="mr-3 h-5 w-5" />
+              Dark Mode
+            </>
+          )}
+        </button>
+      </div>
     </div>
   );
 }
