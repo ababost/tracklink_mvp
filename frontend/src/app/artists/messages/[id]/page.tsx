@@ -19,7 +19,27 @@ const mockThread = {
     status: 'In Negotiation'
   },
   messages: [
-    // ... mock messages
+    {
+      id: 1,
+      sender: 'John Promoter',
+      timestamp: '2024-01-15 10:30 AM',
+      content: 'Hi, I would love to book you for our upcoming summer festival. We are looking for a headliner for our main stage on July 15th. The festival attracts around 5000 people. Would you be interested?',
+      isSender: false,
+    },
+    {
+      id: 2,
+      sender: 'DJ Pulse',
+      timestamp: '2024-01-15 11:45 AM',
+      content: 'Hello John, thank you for reaching out! This sounds interesting. Could you provide more details about the festival, such as the location, set time, and your budget for the headliner?',
+      isSender: true,
+    },
+    {
+      id: 3,
+      sender: 'John Promoter',
+      timestamp: '2024-01-15 2:15 PM',
+      content: "The festival is located in Central Park, NYC. We're looking at a 90-minute set from 10:30 PM to midnight. Our budget for the headliner is $5000, including accommodation and travel. Does this align with your requirements?",
+      isSender: false,
+    },
   ],
   promoter: {
     name: 'John Promoter',
@@ -145,10 +165,12 @@ export default function MessagePage({ params }: { params: { id: string } }) {
                 <div
                   className={`max-w-[80%] space-y-1 rounded-lg p-4 ${message.isSender 
                     ? 'bg-primary text-secondary' 
-                    : 'bg-secondary/80 border border-primary/10'}`}
+                    : 'bg-[#F2F2F2] text-[#1C1C1C]'}`}
                 >
                   <div className="flex justify-between items-start gap-4">
-                    <p className="text-xs opacity-70">{message.timestamp}</p>
+                    <p className={`text-xs ${message.isSender ? 'text-secondary/70' : 'text-[#1C1C1C]/70'}`}>
+                      {message.timestamp}
+                    </p>
                   </div>
                   <p className="text-sm">{message.content}</p>
                 </div>
