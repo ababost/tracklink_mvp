@@ -1,7 +1,9 @@
 "use client";
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { useTheme } from 'next-themes';
 
 import {
   Calendar,
@@ -25,11 +27,19 @@ const navigation = [
 
 export function Sidebar() {
   const pathname = usePathname();
+  const { theme } = useTheme();
 
   return (
-    <div className="flex flex-col w-64 border-r bg-gray-50">
+    <div className="flex flex-col w-64 border-r bg-gray-50 dark:bg-dark">
       <div className="p-4">
-        <h2 className="text-xl font-bold">TrackLink</h2>
+        <Image
+          src={theme === 'dark' ? '/Logo_tracklink_white.png' : '/Logo_tracklink_black.png'}
+          alt="TrackLink Logo"
+          width={150}
+          height={40}
+          priority
+          className="object-contain"
+        />
       </div>
       <nav className="flex-1 space-y-1 p-2">
         {navigation.map((item) => {
@@ -40,13 +50,13 @@ export function Sidebar() {
               href={item.href}
               className={`flex items-center px-4 py-2 text-sm font-medium rounded-md ${
                 isActive
-                  ? 'bg-gray-200 text-gray-900'
-                  : 'text-gray-600 hover:bg-gray-100'
+                  ? 'bg-primary text-secondary dark:bg-primary-light dark:text-primary'
+                  : 'text-gray-600 hover:bg-primary/10 dark:text-gray-300 dark:hover:bg-primary-light/10'
               }`}
             >
               <item.icon
                 className={`mr-3 h-5 w-5 ${
-                  isActive ? 'text-gray-900' : 'text-gray-400'
+                  isActive ? 'text-current' : 'text-gray-400 dark:text-gray-500'
                 }`}
               />
               {item.name}
