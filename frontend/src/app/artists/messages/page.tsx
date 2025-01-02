@@ -19,36 +19,9 @@ const mockMessages = [
     date: '2024-01-15',
     unread: true,
   },
-  {
-    id: 2,
-    sender: 'Mike Manager',
-    company: 'Club Nebula',
-    subject: 'Available dates in March?',
-    preview: 'We have some dates available in March and would like to...',
-    date: '2024-01-14',
-    unread: false,
-  },
-  {
-    id: 3,
-    sender: 'Sarah Events',
-    company: 'Beach Party Co',
-    subject: 'Follow-up on Beach Festival Booking',
-    preview: 'Thank you for your interest. Regarding the performance fee...',
-    date: '2024-01-13',
-    unread: true,
-  },
-  {
-    id: 4,
-    sender: 'James Agent',
-    company: 'Global Music Agency',
-    subject: 'New Opportunity - European Tour',
-    preview: 'We have an exciting opportunity for a European tour...',
-    date: '2024-01-12',
-    unread: false,
-  }
+  // ... other mock messages
 ];
 
-// Helper function to get initials
 function getInitials(name: string) {
   return name
     .split(' ')
@@ -66,7 +39,7 @@ export default function MessagesPage() {
       <div className="flex justify-between items-center">
         <div className="space-y-1">
           <h1 className="text-2xl font-bold">Messages</h1>
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-muted-foreground">
             {mockMessages.filter(m => m.unread).length} unread messages
           </p>
         </div>
@@ -89,38 +62,34 @@ export default function MessagesPage() {
           {mockMessages.map((message) => (
             <Card
               key={message.id}
-              className={`cursor-pointer transition-colors hover:bg-gray-50 ${
-                message.unread ? 'border-l-4 border-l-blue-500' : ''
-              }`}
+              className={`cursor-pointer transition-all duration-200 hover:bg-primary-light/10 ${message.unread ? 'border-l-4 border-l-primary' : ''}`}
               onClick={() => router.push(`/artists/messages/${message.id}`)}
             >
               <CardContent className="p-4">
                 <div className="flex gap-4">
-                  {/* Avatar */}
                   <Avatar>
-                    <AvatarFallback>{getInitials(message.sender)}</AvatarFallback>
+                    <AvatarFallback className="bg-primary text-secondary">
+                      {getInitials(message.sender)}
+                    </AvatarFallback>
                   </Avatar>
 
-                  {/* Message Content */}
                   <div className="flex-1">
                     <div className="flex justify-between items-start">
                       <div className="space-y-1">
                         <div className="flex items-center gap-2">
-                          <h3 className={`font-semibold ${
-                            message.unread ? 'text-blue-600' : ''
-                          }`}>
+                          <h3 className={`font-semibold ${message.unread ? 'text-primary' : ''}`}>
                             {message.sender}
                           </h3>
-                          <span className="text-sm text-gray-500">•</span>
-                          <span className="text-sm text-gray-500">{message.company}</span>
+                          <span className="text-sm text-muted-foreground">•</span>
+                          <span className="text-sm text-muted-foreground">{message.company}</span>
                         </div>
-                        <p className="text-sm font-medium text-gray-800">{message.subject}</p>
-                        <p className="text-sm text-gray-500">{message.preview}</p>
+                        <p className="text-sm font-medium">{message.subject}</p>
+                        <p className="text-sm text-muted-foreground">{message.preview}</p>
                       </div>
                       <div className="flex flex-col items-end gap-2">
-                        <span className="text-xs text-gray-400">{message.date}</span>
+                        <span className="text-xs text-muted-foreground">{message.date}</span>
                         {message.unread && (
-                          <span className="inline-flex items-center rounded-full bg-blue-100 px-2 py-1 text-xs font-medium text-blue-700">
+                          <span className="inline-flex items-center rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary">
                             New
                           </span>
                         )}
