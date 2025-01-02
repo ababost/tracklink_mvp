@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
+import { useState, useEffect } from 'react';
 
 import {
   Calendar,
@@ -30,10 +31,34 @@ const navigation = [
 export function Sidebar() {
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // After mounting, we have access to the theme
+  useEffect(() => setMounted(true), []);
 
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
   };
+
+  // Prevent hydration mismatch by rendering a skeleton until mounted
+  if (!mounted) {
+    return (
+      <div className="flex flex-col h-screen w-64 border-r bg-gray-50">
+        <div className="p-4 h-[40px] animate-pulse bg-gray-200 rounded" />
+        <nav className="flex-1 space-y-1 p-2">
+          {navigation.map((_, i) => (
+            <div
+              key={i}
+              className="h-10 animate-pulse bg-gray-200 rounded-md mb-1"
+            />
+          ))}
+        </nav>
+        <div className="p-4 border-t border-gray-200">
+          <div className="h-10 animate-pulse bg-gray-200 rounded-md" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col h-screen w-64 border-r bg-gray-50 dark:bg-dark">
