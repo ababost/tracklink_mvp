@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Calendar, MessageSquare, BarChart3 } from 'lucide-react';
 
@@ -25,14 +24,6 @@ export default function LandingPage() {
               className="hidden dark:block"
             />
           </div>
-          <div className="flex items-center space-x-4">
-            <Link href="/sign-in">
-              <Button variant="ghost">Log in</Button>
-            </Link>
-            <Link href="/sign-up">
-              <Button>Get Started</Button>
-            </Link>
-          </div>
         </div>
       </nav>
 
@@ -45,16 +36,12 @@ export default function LandingPage() {
           Manage your bookings, communicate with promoters, and grow your music career - all in one place.
         </p>
         <div className="mt-10 flex items-center justify-center gap-x-6">
-          <Link href="/sign-up">
-            <Button size="lg" className="text-lg px-8">
-              Start Now
-            </Button>
-          </Link>
-          <Link href="#how-it-works" className="text-sm font-semibold leading-6">
-            <Button variant="link" className="text-lg">
-              Learn more <span aria-hidden="true">→</span>
-            </Button>
-          </Link>
+          <Button size="lg" className="text-lg px-8">
+            Start Now
+          </Button>
+          <Button variant="link" className="text-lg">
+            Learn more <span aria-hidden="true">→</span>
+          </Button>
         </div>
 
         {/* Features Preview */}
