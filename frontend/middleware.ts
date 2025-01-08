@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { withClerkMiddleware, getAuth } from '@clerk/nextjs/server';
+import { clerkMiddleware, getAuth } from '@clerk/nextjs/server';
  
-export default withClerkMiddleware((req: NextRequest) => {
+export default clerkMiddleware((req: NextRequest) => {
   const { userId } = getAuth(req);
   const publicPaths = ["/", "/sign-in*", "/sign-up*"];
   
