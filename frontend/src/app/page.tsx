@@ -26,10 +26,10 @@ export default function LandingPage() {
             />
           </div>
           <div className="flex items-center space-x-4">
-            <Link href="/auth/login">
+            <Link href="/sign-in">
               <Button variant="ghost">Log in</Button>
             </Link>
-            <Link href="/auth/signup">
+            <Link href="/sign-up">
               <Button>Get Started</Button>
             </Link>
           </div>
@@ -45,7 +45,7 @@ export default function LandingPage() {
           Manage your bookings, communicate with promoters, and grow your music career - all in one place.
         </p>
         <div className="mt-10 flex items-center justify-center gap-x-6">
-          <Link href="/auth/signup">
+          <Link href="/sign-up">
             <Button size="lg" className="text-lg px-8">
               Start Now
             </Button>
