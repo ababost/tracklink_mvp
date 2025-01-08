@@ -2,7 +2,6 @@
 
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Badge } from '@/components/ui/badge';
 
 const mockBookings = {
   upcoming: [
@@ -57,80 +56,89 @@ const mockBookings = {
   ],
 };
 
+function BookingCard({ booking }: { booking: any }) {
+  return (
+    <Card>
+      <CardContent className="p-4">
+        <div className="flex justify-between items-start">
+          <div>
+            <h3 className="font-semibold text-lg">{booking.eventName}</h3>
+            <div className="mt-2 space-y-1 text-sm text-muted-foreground">
+              <p>
+                📅 {booking.date} at {booking.time}
+              </p>
+              <p>📍 {booking.venue}</p>
+              <p>👤 {booking.promoter}</p>
+              <p>ℹ️ {booking.details}</p>
+            </div>
+          </div>
+          <div className="text-right">
+            <p className="font-semibold text-lg text-primary">{booking.fee}</p>
+            <span 
+              className={`mt-2 inline-block px-2 py-1 rounded-full text-xs font-medium
+                ${booking.status === 'confirmed' 
+                  ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100' 
+                  : booking.status === 'completed'
+                  ? 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-100'
+                  : booking.status === 'negotiating'
+                  ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100'
+                  : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-100'
+                }`}
+            >
+              {booking.status}
+            </span>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
 export default function BookingsPage() {
   return (
     <div className="p-6 space-y-6">
       <h1 className="text-2xl font-bold">Bookings</h1>
 
       <Tabs defaultValue="upcoming" className="w-full">
-        <TabsList className="grid w-full grid-cols-3 lg:w-[400px]">
-          <TabsTrigger value="upcoming">
-            Upcoming ({mockBookings.upcoming.length})
+        <TabsList className="grid w-full grid-cols-3 lg:w-[400px] mb-4">
+          <TabsTrigger 
+            value="upcoming"
+            className="data-[state=active]:bg-primary data-[state=active]:text-white hover:bg-primary/10 transition-colors"
+          >
+            Upcoming
           </TabsTrigger>
-          <TabsTrigger value="pending">
-            Pending ({mockBookings.pending.length})
+          <TabsTrigger 
+            value="pending"
+            className="data-[state=active]:bg-primary data-[state=active]:text-white hover:bg-primary/10 transition-colors"
+          >
+            Pending
           </TabsTrigger>
-          <TabsTrigger value="past">
-            Past ({mockBookings.past.length})
+          <TabsTrigger 
+            value="past"
+            className="data-[state=active]:bg-primary data-[state=active]:text-white hover:bg-primary/10 transition-colors"
+          >
+            Past
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="upcoming" className="space-y-4 mt-4">
+        <TabsContent value="upcoming" className="space-y-4">
           {mockBookings.upcoming.map((booking) => (
             <BookingCard key={booking.id} booking={booking} />
           ))}
         </TabsContent>
 
-        <TabsContent value="pending" className="space-y-4 mt-4">
+        <TabsContent value="pending" className="space-y-4">
           {mockBookings.pending.map((booking) => (
             <BookingCard key={booking.id} booking={booking} />
           ))}
         </TabsContent>
 
-        <TabsContent value="past" className="space-y-4 mt-4">
+        <TabsContent value="past" className="space-y-4">
           {mockBookings.past.map((booking) => (
             <BookingCard key={booking.id} booking={booking} />
           ))}
         </TabsContent>
       </Tabs>
     </div>
-  );
-}
-
-function BookingCard({ booking }: { booking: any }) {
-  return (
-    <Card>
-      <CardContent className="p-4">
-        <div className="flex justify-between items-start">
-          <div className="space-y-2">
-            <div className="space-y-1">
-              <h3 className="font-semibold text-lg">{booking.eventName}</h3>
-              <p className="text-sm text-muted-foreground">
-                {booking.date} at {booking.time}
-              </p>
-              <p className="text-sm text-muted-foreground">{booking.venue}</p>
-            </div>
-            <div className="space-y-1">
-              <p className="text-sm font-medium">
-                <span className="text-muted-foreground">Promoter:</span> {booking.promoter}
-              </p>
-              <p className="text-sm">{booking.details}</p>
-            </div>
-          </div>
-          <div className="text-right space-y-2">
-            <p className="font-semibold text-lg text-primary">{booking.fee}</p>
-            <Badge 
-              variant={booking.status === 'confirmed' 
-                ? 'success' 
-                : booking.status === 'completed'
-                ? 'secondary'
-                : 'pending'}
-            >
-              {booking.status}
-            </Badge>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
   );
 }
