@@ -1,5 +1,8 @@
+"use client";
+
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Badge } from '@/components/ui/badge';
 
 const mockBookings = {
   upcoming: [
@@ -59,11 +62,17 @@ export default function BookingsPage() {
     <div className="p-6 space-y-6">
       <h1 className="text-2xl font-bold">Bookings</h1>
 
-      <Tabs defaultValue="upcoming">
-        <TabsList>
-          <TabsTrigger value="upcoming">Upcoming</TabsTrigger>
-          <TabsTrigger value="pending">Pending</TabsTrigger>
-          <TabsTrigger value="past">Past</TabsTrigger>
+      <Tabs defaultValue="upcoming" className="w-full">
+        <TabsList className="grid w-full grid-cols-3 lg:w-[400px]">
+          <TabsTrigger value="upcoming">
+            Upcoming ({mockBookings.upcoming.length})
+          </TabsTrigger>
+          <TabsTrigger value="pending">
+            Pending ({mockBookings.pending.length})
+          </TabsTrigger>
+          <TabsTrigger value="past">
+            Past ({mockBookings.past.length})
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="upcoming" className="space-y-4 mt-4">
@@ -93,32 +102,32 @@ function BookingCard({ booking }: { booking: any }) {
     <Card>
       <CardContent className="p-4">
         <div className="flex justify-between items-start">
-          <div>
-            <h3 className="font-semibold text-lg">{booking.eventName}</h3>
-            <div className="mt-2 space-y-1">
-              <p className="text-sm text-gray-500">
-                📅 {booking.date} at {booking.time}
+          <div className="space-y-2">
+            <div className="space-y-1">
+              <h3 className="font-semibold text-lg">{booking.eventName}</h3>
+              <p className="text-sm text-muted-foreground">
+                {booking.date} at {booking.time}
               </p>
-              <p className="text-sm text-gray-500">📍 {booking.venue}</p>
-              <p className="text-sm text-gray-500">👤 {booking.promoter}</p>
-              <p className="text-sm text-gray-500">ℹ️ {booking.details}</p>
+              <p className="text-sm text-muted-foreground">{booking.venue}</p>
+            </div>
+            <div className="space-y-1">
+              <p className="text-sm font-medium">
+                <span className="text-muted-foreground">Promoter:</span> {booking.promoter}
+              </p>
+              <p className="text-sm">{booking.details}</p>
             </div>
           </div>
-          <div className="text-right">
-            <p className="font-semibold text-lg">{booking.fee}</p>
-            <span 
-              className={`mt-2 inline-block px-2 py-1 rounded-full text-xs
-                ${booking.status === 'confirmed' 
-                  ? 'bg-green-100 text-green-800' 
-                  : booking.status === 'completed'
-                  ? 'bg-gray-100 text-gray-800'
-                  : booking.status === 'negotiating'
-                  ? 'bg-blue-100 text-blue-800'
-                  : 'bg-yellow-100 text-yellow-800'
-                }`}
+          <div className="text-right space-y-2">
+            <p className="font-semibold text-lg text-primary">{booking.fee}</p>
+            <Badge 
+              variant={booking.status === 'confirmed' 
+                ? 'success' 
+                : booking.status === 'completed'
+                ? 'secondary'
+                : 'pending'}
             >
               {booking.status}
-            </span>
+            </Badge>
           </div>
         </div>
       </CardContent>
