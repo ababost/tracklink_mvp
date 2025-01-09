@@ -1,19 +1,17 @@
-import { authMiddleware, redirectToSignIn } from '@clerk/nextjs';
+import { clerkMiddleware } from "@clerk/nextjs/server";
 
-export default authMiddleware({
-  // Routes that can be accessed while signed out
-  publicRoutes: ['/', '/contact', '/about'],
-  // Routes that can always be accessed, and have
-  // no authentication information
-  ignoredRoutes: ['/api/webhook'],
-  afterAuth(auth, req, evt) {
-    // Handle users who aren't authenticated
-    if (!auth.userId && !auth.isPublicRoute) {
-      return redirectToSignIn({ returnBackUrl: req.url });
-    }
-  },
-});
+export default clerkMiddleware();
 
 export const config = {
-  matcher: ['/((?!.+\.[\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * Feel free to modify this pattern to include more paths.
+     */
+    "/((?!static|.*\..*|_next|favicon.ico).*)",
+    "/",
+  ],
 };
