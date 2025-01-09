@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
  
-const publicPaths = ["/", "/sign-in*", "/sign-up*"];
+const publicPaths = ["/", "/sign-in(.*)", "/sign-up(.*)"];
  
 // Create route matcher to check if path is public
 const isPublic = createRouteMatcher(publicPaths);
