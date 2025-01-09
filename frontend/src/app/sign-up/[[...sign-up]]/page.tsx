@@ -4,15 +4,11 @@ export default function SignUpPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
       <SignUp
-        appearance={{
-          elements: {
-            rootBox: "mx-auto",
-            card: "bg-white dark:bg-gray-800 shadow-none",
-            formButtonPrimary: "bg-primary hover:bg-primary/90",
-          },
-        }}
-        afterSignUpUrl="/artists/dashboard"
+        path="/sign-up"
+        routing="path"
         signInUrl="/sign-in"
+        afterSignUpUrl="/artists/profile/setup"
+        redirectUrl="/artists/profile/setup"
       />
     </div>
   );
