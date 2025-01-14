@@ -44,16 +44,6 @@ const mockVenues = [
 export default function VenuesPage() {
   return (
     <div className="p-6 space-y-6">
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Venues</h1>
-        <div className="flex gap-4">
-          <Input
-            placeholder="Search venues..."
-            className="w-64"
-          />
-          <Button>Add New Venue</Button>
-        </div>
-      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {mockVenues.map((venue) => (

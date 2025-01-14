@@ -97,7 +97,6 @@ function BookingCard({ booking }: { booking: any }) {
 export default function BookingsPage() {
   return (
     <div className="p-6 space-y-6">
-      <h1 className="text-2xl font-bold">Bookings</h1>
 
       <Tabs defaultValue="upcoming" className="w-full">
         <TabsList className="grid w-full grid-cols-3 lg:w-[400px] mb-4">

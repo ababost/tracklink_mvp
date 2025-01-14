@@ -36,25 +36,6 @@ export default function MessagesPage() {
   return (
     <div className="p-6 space-y-6">
       {/* Header with search and compose */}
-      <div className="flex justify-between items-center">
-        <div className="space-y-1">
-          <h1 className="text-2xl font-bold">Messages</h1>
-          <p className="text-sm text-muted-foreground">
-            {mockMessages.filter(m => m.unread).length} unread messages
-          </p>
-        </div>
-        <div className="flex gap-4">
-          <Input
-            type="search"
-            placeholder="Search messages..."
-            className="w-64"
-          />
-          <Button>
-            <MessageSquarePlus className="h-4 w-4 mr-2" />
-            New Message
-          </Button>
-        </div>
-      </div>
 
       {/* Messages list */}
       <ScrollArea className="h-[calc(100vh-200px)]">

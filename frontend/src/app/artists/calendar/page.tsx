@@ -59,12 +59,6 @@ export default function CalendarPage() {
 
   return (
     <div className="p-6 space-y-6">
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Calendar</h1>
-        <Badge variant="outline" className="text-sm">
-          {upcomingEvents.length} Upcoming Events
-        </Badge>
-      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Calendar */}

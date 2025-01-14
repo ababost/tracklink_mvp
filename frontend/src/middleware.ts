@@ -1,16 +1,29 @@
-import { authMiddleware } from "@clerk/nextjs";
- 
-export default authMiddleware({
-  publicRoutes: ["/", "/sign-in", "/sign-up"],
-  afterAuth(auth, req, evt) {
-    // If user is signed in and trying to access public routes
-    if (auth.userId && req.nextUrl.pathname === "/") {
-      const dashboardUrl = new URL("/artists/dashboard", req.url);
-      return Response.redirect(dashboardUrl);
-    }
-  },
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
+import { NextResponse } from 'next/server';
+
+const isProtectedRoute = createRouteMatcher(['/dashboard(.*)', '/forum(.*)']);
+
+export default clerkMiddleware(async (auth, req) => {
+  const { userId } = auth;
+
+  if (isProtectedRoute(req)) {
+    await auth.protect();
+  }
+
+  // Example: Redirect authenticated users from the homepage to the dashboard
+  if (userId && req.nextUrl.pathname === '/') {
+    const dashboardUrl = new URL('/dashboard', req.url);
+    return NextResponse.redirect(dashboardUrl);
+  }
+
+  return NextResponse.next();
 });
- 
+
 export const config = {
-  matcher: ["/((?!.+\\.[\\w]+$|_next|_vercel|[^/]+\\.[^/]+$).*)"],
+  matcher: [
+    // Skip Next.js internals and all static files, unless found in search params
+    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+    // Always run for API routes
+    '/(api|trpc)(.*)',
+  ],
 };
