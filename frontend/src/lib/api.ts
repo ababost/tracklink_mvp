@@ -1,14 +1,36 @@
-// src/lib/api.ts
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+import axios from 'axios';
 
-export async function fetchArtist(id: string) {
-  const response = await fetch(`${API_URL}/artists/${id}`);
-  if (!response.ok) throw new Error('Failed to fetch artist');
-  return response.json();
-}
+const api = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  withCredentials: true
+});
 
-export async function fetchArtistGigs(id: string) {
-  const response = await fetch(`${API_URL}/artists/${id}/gigs`);
-  if (!response.ok) throw new Error('Failed to fetch gigs');
-  return response.json();
-}
+// Add request interceptor for authentication
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+// Add response interceptor for error handling
+api.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    if (error.response?.status === 401) {
+      // Handle token expiration
+      localStorage.removeItem('token');
+      window.location.href = '/login';
+    }
+    return Promise.reject(error);
+  }
+);
+
+export default api;
