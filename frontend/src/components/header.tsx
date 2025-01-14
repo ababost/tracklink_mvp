@@ -85,7 +85,7 @@ export function Header() {
   const actions = getPageActions(pathname);
 
   return (
-    <div className="w-full bg-background dark:bg-gray-900">
+    <div className="w-full bg-background dark:bg-gray-900 ">
       <div className="flex h-16 items-center justify-between px-6">
         <h1 className="text-2xl font-bold">{pageTitle}</h1>
         <div className="flex items-center gap-4">
@@ -103,3 +103,4 @@ export function Header() {
     </div>
   );
 }
+
