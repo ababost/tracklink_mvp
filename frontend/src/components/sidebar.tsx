@@ -29,7 +29,7 @@ export function Sidebar() {
   const { theme } = useTheme();
 
   return (
-    <div className="flex flex-col w-64 border-r bg-white dark:bg-gray-900">
+    <div className="flex flex-col w-64 bg-background dark:bg-gray-900">
       <div className="p-4 border-b dark:border-gray-800">
         <Link href="/artists/dashboard" className="flex items-center justify-center hover:opacity-80 transition-opacity">
           <Image
@@ -41,7 +41,7 @@ export function Sidebar() {
           />
         </Link>
       </div>
-      <nav className="flex-1 space-y-1 p-2">
+      <nav className="flex-1 space-y-1 p-4">
         {navigation.map((item) => {
           const isActive = pathname === item.href;
           return (
