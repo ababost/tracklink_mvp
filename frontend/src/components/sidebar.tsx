@@ -4,8 +4,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
-import { useState, useEffect } from 'react';
-
 import {
   Calendar,
   MessageSquare,
@@ -14,8 +12,6 @@ import {
   Settings,
   LayoutDashboard,
   MapPin,
-  Sun,
-  Moon
 } from 'lucide-react';
 
 const navigation = [
@@ -30,51 +26,21 @@ const navigation = [
 
 export function Sidebar() {
   const pathname = usePathname();
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  // After mounting, we have access to the theme
-  useEffect(() => setMounted(true), []);
-
-  const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
-  };
-
-  // Prevent hydration mismatch by rendering a skeleton until mounted
-  if (!mounted) {
-    return (
-      <div className="flex flex-col h-screen w-64 border-r bg-gray-50">
-        <div className="p-4 h-[40px] animate-pulse bg-gray-200 rounded" />
-        <nav className="flex-1 space-y-1 p-2">
-          {navigation.map((_, i) => (
-            <div
-              key={i}
-              className="h-10 animate-pulse bg-gray-200 rounded-md mb-1"
-            />
-          ))}
-        </nav>
-        <div className="p-4 border-t border-gray-200">
-          <div className="h-10 animate-pulse bg-gray-200 rounded-md" />
-        </div>
-      </div>
-    );
-  }
+  const { theme } = useTheme();
 
   return (
-    <div className="flex flex-col h-screen w-64 border-r bg-gray-50 dark:bg-dark">
-      {/* Logo Section */}
-      <div className="p-4">
-        <Image
-          src={theme === 'dark' ? '/Logo_tracklink_white.png' : '/Logo_tracklink_black.png'}
-          alt="TrackLink Logo"
-          width={150}
-          height={40}
-          priority
-          className="object-contain"
-        />
+    <div className="flex flex-col w-64 border-r bg-white dark:bg-gray-900">
+      <div className="p-4 border-b dark:border-gray-800">
+        <Link href="/artists/dashboard" className="flex items-center justify-center hover:opacity-80 transition-opacity">
+          <Image
+            src={theme === 'dark' ? '/Logo_tracklink_white.png' : '/Logo_tracklink_black.png'}
+            alt="TrackLink Logo"
+            width={150}
+            height={40}
+            priority
+          />
+        </Link>
       </div>
-
-      {/* Navigation Section */}
       <nav className="flex-1 space-y-1 p-2">
         {navigation.map((item) => {
           const isActive = pathname === item.href;
@@ -84,7 +50,7 @@ export function Sidebar() {
               href={item.href}
               className={`flex items-center px-4 py-2 text-sm font-medium rounded-md ${
                 isActive
-                  ? 'bg-primary text-secondary dark:bg-primary-light dark:text-primary'
+                  ? 'bg-primary text-white dark:bg-primary-light dark:text-primary'
                   : 'text-gray-600 hover:bg-primary/10 dark:text-gray-300 dark:hover:bg-primary-light/10'
               }`}
             >
@@ -98,26 +64,6 @@ export function Sidebar() {
           );
         })}
       </nav>
-
-      {/* Theme Toggle Button */}
-      <div className="p-4 border-t border-gray-200 dark:border-gray-800">
-        <button
-          onClick={toggleTheme}
-          className="flex items-center w-full px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-primary/10 dark:hover:bg-primary-light/10 rounded-md transition-colors"
-        >
-          {theme === 'dark' ? (
-            <>
-              <Sun className="mr-3 h-5 w-5" />
-              Light Mode
-            </>
-          ) : (
-            <>
-              <Moon className="mr-3 h-5 w-5" />
-              Dark Mode
-            </>
-          )}
-        </button>
-      </div>
     </div>
   );
 }
