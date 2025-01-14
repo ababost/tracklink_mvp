@@ -4,7 +4,8 @@ import { usePathname } from 'next/navigation';
 import { UserButton } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { MessageSquarePlus, Search, Plus } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { MessageSquarePlus, Search, Plus, Calendar } from 'lucide-react';
 
 const getPageTitle = (pathname: string) => {
   const paths = {
@@ -37,10 +38,15 @@ const getPageActions = (pathname: string) => {
       );
     case '/artists/bookings':
       return (
-        <Button>
-          <Plus className="h-4 w-4 mr-2" />
-          New Booking
-        </Button>
+        <div className="flex items-center gap-4">
+          <Badge variant="secondary" className="text-sm">
+            12 Upcoming Events
+          </Badge>
+          <Button>
+            <Plus className="h-4 w-4 mr-2" />
+            New Booking
+          </Button>
+        </div>
       );
     case '/artists/venues':
       return (
@@ -56,6 +62,18 @@ const getPageActions = (pathname: string) => {
           </Button>
         </div>
       );
+    case '/artists/calendar':
+      return (
+        <div className="flex items-center gap-4">
+          <Badge variant="secondary" className="text-sm">
+            4 Events This Week
+          </Badge>
+          <Button>
+            <Calendar className="h-4 w-4 mr-2" />
+            Add Event
+          </Button>
+        </div>
+      );
     default:
       return null;
   }
@@ -67,7 +85,7 @@ export function Header() {
   const actions = getPageActions(pathname);
 
   return (
-    <header className="sticky top-0 z-40 border-b bg-white dark:bg-gray-900">
+    <div className="w-full border-b dark:border-gray-800 bg-background dark:bg-gray-900">
       <div className="flex h-16 items-center justify-between px-6">
         <h1 className="text-2xl font-bold">{pageTitle}</h1>
         <div className="flex items-center gap-4">
@@ -82,6 +100,6 @@ export function Header() {
           />
         </div>
       </div>
-    </header>
+    </div>
   );
 }
