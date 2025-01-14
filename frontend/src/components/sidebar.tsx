@@ -30,7 +30,7 @@ export function Sidebar() {
 
   return (
     <div className="flex flex-col w-64 bg-background dark:bg-gray-900">
-      <div className="p-4 border-b dark:border-gray-800">
+      <div className="p-4">
         <Link href="/artists/dashboard" className="flex items-center justify-center hover:opacity-80 transition-opacity">
           <Image
             src={theme === 'dark' ? '/Logo_tracklink_white.png' : '/Logo_tracklink_black.png'}
