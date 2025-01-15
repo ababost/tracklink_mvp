@@ -12,18 +12,18 @@ export const messageService = {
     return response.data;
   },
 
-  async getById(id: string) {
-    const response = await apiClient.get(`/messages/${id}`);
+  async getThreadByGig(gigId: string) {
+    const response = await apiClient.get(`/messages/gig/${gigId}`);
     return response.data;
   },
 
-  async update(id: string, data: Partial<Message>) {
-    const response = await apiClient.put(`/messages/${id}`, data);
+  async getArtistMessages(artistId: string) {
+    const response = await apiClient.get(`/messages/artist/${artistId}`);
     return response.data;
   },
 
-  async delete(id: string) {
-    const response = await apiClient.delete(`/messages/${id}`);
+  async markAsRead(messageId: string) {
+    const response = await apiClient.put(`/messages/${messageId}/read`);
     return response.data;
   }
 };

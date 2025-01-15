@@ -1,7 +1,7 @@
 export interface Message {
   id: string;
-  subject: string;
   content: string;
+  gigId: string;
   fromId: string;
   fromType: 'artist' | 'promoter';
   toId: string;
