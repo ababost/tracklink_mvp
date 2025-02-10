@@ -1,18 +1,24 @@
 export interface Artist {
   id: string;
   name: string;
-  email: string;
-  phone?: string;
-  genre?: string;
+  genre: string;
+  image: string;
   bio?: string;
-  location?: string;
-  availability?: {
-    dates: string[];
-    preferences?: {
-      venues?: string[];
-      cities?: string[];
-    };
+  socialLinks?: {
+    spotify?: string;
+    instagram?: string;
+    twitter?: string;
   };
-  createdAt: string;
-  updatedAt: string;
+  stats?: {
+    monthlyListeners?: number;
+    followers?: number;
+  };
+}
+
+export interface Message {
+  id: string;
+  text: string;
+  sender: 'user' | 'ai';
+  timestamp: string;
+  artistId?: string;
 }

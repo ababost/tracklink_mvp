@@ -1,19 +1,13 @@
-import type { Metadata } from 'next';
-import { Urbanist } from 'next/font/google';
-import { ClerkProvider } from '@clerk/nextjs';
-import { Header } from '@/components/header';
-import './globals.css';
-import { ThemeProvider } from '@/components/theme-provider';
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import AgentProfile from "@/components/AgentProfile";
 
-const urbanist = Urbanist({ 
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-urbanist',
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'TrackLink',
-  description: 'AI-powered DJ booking and management system',
+  title: "Tracklink MVP",
+  description: "Artist management platform with AI assistance",
 };
 
 export default function RootLayout({
@@ -22,18 +16,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
-        <body className={`${urbanist.variable} font-sans antialiased`}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-          >
-            {children}
-          </ThemeProvider>
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en">
+      <body className={inter.className}>
+        <main className="min-h-screen bg-gray-50">
+          {children}
+          <AgentProfile />
+        </main>
+      </body>
+    </html>
   );
 }
