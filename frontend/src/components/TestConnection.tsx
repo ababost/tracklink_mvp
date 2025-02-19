@@ -12,35 +12,15 @@ export default function TestConnection() {
   const [response, setResponse] = useState<PingResponse | null>(null);
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState(false);
-  const [apiUrl, setApiUrl] = useState('');
-
-  useEffect(() => {
-    setApiUrl(process.env.NEXT_PUBLIC_API_URL || 'Not set');
-  }, []);
 
   const testConnection = async () => {
     setLoading(true);
     setError('');
     try {
-      console.log('Attempting to connect to:', process.env.NEXT_PUBLIC_API_URL);
-      
-      // First test root endpoint
-      try {
-        const rootResponse = await api.get('/');
-        console.log('Root endpoint response:', rootResponse.data);
-      } catch (rootError) {
-        console.error('Root endpoint error:', rootError);
-      }
-
-      // Then test ping endpoint
       const { data } = await api.get<PingResponse>('/api/test/ping');
-      console.log('Ping endpoint response:', data);
       setResponse(data);
-    } catch (err: any) {
-      const errorMessage = err.response 
-        ? `Failed to connect to backend: ${err.response.status} ${err.response.statusText}`
-        : 'Failed to connect to backend: Network Error';
-      setError(errorMessage);
+    } catch (err) {
+      setError('Failed to connect to backend');
       console.error('Connection test failed:', err);
     } finally {
       setLoading(false);
@@ -51,10 +31,6 @@ export default function TestConnection() {
     <div className="p-4 max-w-md mx-auto">
       <h2 className="text-lg font-semibold mb-4">Connection Test</h2>
       
-      <div className="mb-4 p-2 bg-gray-100 rounded">
-        <p><strong>API URL:</strong> {apiUrl}</p>
-      </div>
-
       <button
         onClick={testConnection}
         disabled={loading}

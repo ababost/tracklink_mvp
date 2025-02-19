@@ -1,7 +1,7 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 
-const isProtectedRoute = createRouteMatcher(['/artists(.*)', '/forum(.*)']);
+const isProtectedRoute = createRouteMatcher(['/forum(.*)']);
 
 export default clerkMiddleware(async (auth, req) => {
   const { userId } = auth;
@@ -9,13 +9,6 @@ export default clerkMiddleware(async (auth, req) => {
   if (isProtectedRoute(req)) {
     await auth.protect();
   }
-
-  // Example: Redirect authenticated users from the homepage to the dashboard
-  if (userId && req.nextUrl.pathname === '/') {
-    const dashboardUrl = new URL('/artists/dashboard', req.url);
-    return NextResponse.redirect(dashboardUrl);
-  }
-
   return NextResponse.next();
 });
 

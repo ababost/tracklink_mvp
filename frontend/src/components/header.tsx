@@ -1,7 +1,6 @@
 "use client";
 
 import { usePathname, useRouter } from 'next/navigation';
-import { UserButton } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -131,14 +130,7 @@ export function Header() {
               </div>
             </div>
           </div>
-          <UserButton
-            afterSignOutUrl="/"
-            appearance={{
-              elements: {
-                avatarBox: "w-9 h-9",
-              },
-            }}
-          />
+
         </div>
       </div>
     );
@@ -151,14 +143,6 @@ export function Header() {
         <h1 className="text-2xl font-bold">{getPageTitle(pathname)}</h1>
         <div className="flex items-center gap-4">
           {getPageActions(pathname)}
-          <UserButton
-            afterSignOutUrl="/"
-            appearance={{
-              elements: {
-                avatarBox: "w-9 h-9",
-              },
-            }}
-          />
         </div>
       </div>
     </div>

@@ -36,9 +36,11 @@ export default function LandingPage() {
           Manage your bookings, communicate with promoters, and grow your music career - all in one place.
         </p>
         <div className="mt-10 flex items-center justify-center gap-x-6">
+          <a href="/artists/dashboard" className="text-lg px-8 py-3 bg-primary text-white rounded-lg">
           <Button size="lg" className="text-lg px-8">
             Start Now
           </Button>
+          </a>
           <Button variant="link" className="text-lg">
             Learn more <span aria-hidden="true">→</span>
           </Button>
